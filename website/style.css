@@ -211,3 +211,6 @@ body { counter-reset: sec; }
 .hero .frame .bar i:first-child { margin-left: 0; }
 .hero .frame .bar span { position: absolute; left: 0; right: 0; margin: 0; text-align: center; pointer-events: none; }
 .hero .cta, .hero .trust { justify-content: center; text-align: center; width: 100%; }
+.hero h1 { max-width: none; font-size: clamp(26px, 5.4vw, 70px); white-space: nowrap; }
+.hero .frame .bar { justify-content: flex-start; }
+@media (max-width: 560px) { .hero h1 { white-space: normal; font-size: clamp(30px, 9vw, 44px); } }
