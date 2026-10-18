@@ -52,7 +52,19 @@ OpenStorage is **read-only**: it never deletes, moves or uploads anything. Symli
 
 ## Install
 
-Grab a build from the [releases page](https://github.com/MarshallNickolauson/OpenStorage/releases):
+**One line (macOS and Linux):**
+
+```bash
+curl -fsSL https://openstorage.mdnlabs.dev/install.sh | bash
+```
+
+**Windows (PowerShell):**
+
+```powershell
+irm https://openstorage.mdnlabs.dev/install.ps1 | iex
+```
+
+Or grab a build from the [releases page](https://github.com/MarshallNickolauson/OpenStorage/releases):
 
 - **macOS**: `.dmg` (Apple silicon and Intel). Unsigned, so right-click → Open the first time.
 - **Windows**: a single portable `.exe`. SmartScreen may warn because it is unsigned.

@@ -130,3 +130,7 @@ document.querySelector('.theme-btn')?.addEventListener('click', () => {
   addEventListener('resize', draw);
   draw();
 })();
+
+document.querySelectorAll('.copy').forEach((b) => b.addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied'; setTimeout(() => (b.textContent = 'Copy'), 1600); } catch (e) {}
+}));

@@ -120,3 +120,8 @@ pre code { background: none; border: 0; padding: 0; }
   .row.flip .row-text { order: 0; }
 }
 @media (max-width: 520px) { .foot-cols { grid-template-columns: 1fr 1fr; } .chips { grid-template-columns: 1fr; } }
+
+.install { display: flex; align-items: center; gap: 10px; max-width: 640px; margin-top: 22px; padding: 6px 6px 6px 16px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg-2); }
+.install code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; background: none; border: 0; padding: 0; font-size: 14px; }
+.install .copy { height: 36px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 8px; background: var(--surface); color: var(--text); font: 500 13px var(--mono); cursor: pointer; }
+.install .copy:hover { background: var(--bg); }
