@@ -202,3 +202,12 @@ body { counter-reset: sec; }
   .row .frame, .row.flip .frame, .row .chips, .row.flip .chips { border: 0; border-top: 1px solid var(--line); }
   .deflist div { grid-template-columns: 1fr; gap: 4px; }
 }
+
+/* hero: everything centered */
+.hero .install { justify-content: center; }
+.hero .install code { flex: 0 1 auto; text-align: center; }
+.hero .frame { margin-inline: auto; text-align: center; }
+.hero .frame .bar { position: relative; justify-content: center; }
+.hero .frame .bar i:first-child { margin-left: 0; }
+.hero .frame .bar span { position: absolute; left: 0; right: 0; margin: 0; text-align: center; pointer-events: none; }
+.hero .cta, .hero .trust { justify-content: center; text-align: center; width: 100%; }
