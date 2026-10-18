@@ -134,3 +134,10 @@ document.querySelector('.theme-btn')?.addEventListener('click', () => {
 document.querySelectorAll('.copy').forEach((b) => b.addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied'; setTimeout(() => (b.textContent = 'Copy'), 1600); } catch (e) {}
 }));
+
+// live GitHub star count
+fetch('https://api.github.com/repos/MarshallNickolauson/OpenStorage').then((r) => r.json()).then((d) => {
+  if (typeof d.stargazers_count !== 'number') return;
+  const n = new Intl.NumberFormat('en', { notation: 'compact' }).format(d.stargazers_count);
+  document.querySelectorAll('[data-stars]').forEach((el) => { el.querySelector('span').textContent = n; el.hidden = false; });
+}).catch(() => {});
