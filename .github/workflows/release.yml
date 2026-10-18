@@ -1,0 +1,49 @@
+name: Release
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - { os: macos-14, target: aarch64-apple-darwin, name: macos-arm64 }
+          - { os: macos-13, target: x86_64-apple-darwin, name: macos-intel }
+          - { os: windows-latest, target: x86_64-pc-windows-msvc, name: windows-x64 }
+          - { os: ubuntu-22.04, target: x86_64-unknown-linux-gnu, name: linux-x64 }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with: { targets: "${{ matrix.target }}" }
+      - run: cargo build --release --target ${{ matrix.target }}
+      - name: Package (unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          mkdir dist
+          cp target/${{ matrix.target }}/release/openstorage dist/
+          if [ "${{ runner.os }}" = "macOS" ]; then
+            APP=dist/OpenStorage.app/Contents
+            mkdir -p $APP/MacOS $APP/Resources
+            cp dist/openstorage $APP/MacOS/OpenStorage
+            cp assets/icon-512.png $APP/Resources/icon.png
+            printf '<?xml version="1.0" encoding="UTF-8"?><plist version="1.0"><dict><key>CFBundleName</key><string>OpenStorage</string><key>CFBundleExecutable</key><string>OpenStorage</string><key>CFBundleIdentifier</key><string>dev.mdnlabs.openstorage</string><key>CFBundlePackageType</key><string>APPL</string><key>NSHighResolutionCapable</key><true/></dict></plist>' > $APP/Info.plist
+            hdiutil create -volname OpenStorage -srcfolder dist/OpenStorage.app -ov -format UDZO openstorage-${{ matrix.name }}.dmg
+          else
+            tar -czf openstorage-${{ matrix.name }}.tar.gz -C dist openstorage
+          fi
+      - name: Package (windows)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: cp target/${{ matrix.target }}/release/openstorage.exe openstorage-${{ matrix.name }}.exe
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            openstorage-*.dmg
+            openstorage-*.tar.gz
+            openstorage-*.exe

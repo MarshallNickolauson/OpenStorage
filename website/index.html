@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenStorage | See what is eating your disk</title>
+<meta name="description" content="OpenStorage scans your drive and shows a sortable tree and a treemap of every file. Tiny, fast, free and open source, in Rust and egui, for macOS, Windows and Linux.">
+<meta property="og:title" content="OpenStorage | See what is eating your disk"><meta property="og:description" content="OpenStorage scans your drive and shows a sortable tree and a treemap of every file. Tiny, fast, free and open source, in Rust and egui, for macOS, Windows and Linux."><meta property="og:image" content="https://openstorage.mdnlabs.dev/img/app.jpg">
+<meta name="theme-color" content="#090c12">
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/style.css">
+<script src="/theme.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="nav-in">
+  <a class="back mono" href="https://mdnlabs.dev" aria-label="Back to mdnlabs.dev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>mdnlabs</a>
+  <a class="brand" href="/"><img src="/img/icon.png" alt="" width="26" height="26"><span>OpenStorage</span></a>
+  <nav class="nav-links mono" aria-label="Main"><a href="/#try">Try it</a><a href="/#features">Features</a><a href="/download">Download</a></nav>
+  <span class="nav-sp"></span>
+  <a class="gh-btn hide-t" href="https://github.com/MarshallNickolauson/OpenStorage" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.96 0-.87.31-1.59.83-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.52.56.83 1.28.83 2.15 0 3.08-1.87 3.76-3.66 3.96.29.25.54.74.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>GitHub</a>
+  <a class="btn btn-nav" href="/download">Download</a>
+  <button class="theme-btn" type="button" aria-label="Toggle light and dark mode"><svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</div></header>
+<main id="main">
+
+<section class="hero"><div class="hero-bg" aria-hidden="true"><i></i><i></i><i></i></div><div class="wrap">
+  <h1>See what is eating your disk.</h1>
+  <p class="sub">OpenStorage scans a folder or a whole drive in seconds and draws every file as a map. A tiny, fast, free alternative to WinDirStat, written in Rust.</p>
+  <div class="cta"><a class="btn" href="/download"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-4.500-4.500M12 15l4.500-4.500M4 20h16"/></svg><span>Download</span></a><a class="btn btn-quiet" href="#try">Try the map</a></div>
+  <p class="trust">macOS, Windows and Linux. MIT license. No account, no telemetry, nothing uploaded.</p>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span class="mono">OpenStorage</span></div><img src="/img/app.jpg" width="1800" height="1140" alt="OpenStorage showing a folder tree on the left and a colored treemap of files on the right"></div>
+</div></section>
+
+<section class="sec" id="try"><div class="wrap">
+  <h2>Try the map.</h2>
+  <p class="lede">A made-up home folder, drawn the way the app draws yours. Hover for details, click a folder to dive in, click a legend entry to light up a file type.</p>
+  <div class="demo">
+    <div class="demo-bar mono"><span class="crumb" id="crumb"></span><span style="flex:1"></span><span id="dsize"></span></div>
+    <canvas id="map" aria-label="Interactive treemap demo"></canvas>
+    <div class="legend mono" id="legend"></div>
+  </div>
+</div></section>
+
+<section class="sec" id="how"><div class="wrap">
+  <h2>Just 3 steps.</h2>
+  <ol class="flow">
+    <li class="step"><h3>Pick</h3><p>Choose a folder or a drive, or drop one on the window.</p></li>
+    <li class="step"><h3>Scan</h3><p>Every core walks the disk at once. Big drives take seconds.</p></li>
+    <li class="step"><h3>Clean up</h3><p>Spot the giants on the map, double-click to open them in your file manager.</p></li>
+  </ol>
+</div></section>
+
+<section id="features"><div class="wrap rows">
+  <div class="row"><div class="row-text"><h2>A map of every byte</h2><p>Each rectangle is a file; its area is its size. Folders nest inside folders, so a glance tells you where the space went. Color shows the kind of file: images, video, audio, archives, code, documents and apps.</p></div>
+    <div class="frame" style="margin:0"><img src="/img/app.jpg" width="1800" height="1140" alt="The treemap" loading="lazy"></div></div>
+  <div class="row flip"><div class="row-text"><h2>Small on purpose</h2><p>One native binary of a few megabytes. No web view, no runtime, no installer service. It is pure Rust with egui, so it starts instantly and idles at nothing.</p></div>
+    <div class="chips"><div class="chip"><i style="background:#3b82f6"></i><b>~4 MB</b><span>release binary</span></div><div class="chip"><i style="background:#2dd4bf"></i><b>100% Rust</b><span>no C toolchain needed</span></div><div class="chip"><i style="background:#fbbf24"></i><b>Parallel</b><span>scans on every core</span></div><div class="chip"><i style="background:#f472b6"></i><b>3 platforms</b><span>macOS, Windows, Linux</span></div></div></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2>What is inside</h2>
+  <dl class="deflist">
+    <div><dt>Tree and map, linked</dt><dd>Click a tile to jump to it in the tree, or a row to outline it on the map.</dd></div>
+    <div><dt>Sorted by size</dt><dd>Biggest first, with a percentage bar and file count on every folder.</dd></div>
+    <div><dt>Zoom into folders</dt><dd>Double-click a folder tile to make it the whole map. Backspace goes back up.</dd></div>
+    <div><dt>Open in file manager</dt><dd>Double-click any file to reveal it in Finder, Explorer or your Linux file manager.</dd></div>
+    <div><dt>File type legend</dt><dd>See totals per type and click one to highlight where those files live.</dd></div>
+    <div><dt>Safe by design</dt><dd>It only reads. It never deletes, moves or uploads anything, and skips symlinks and virtual file systems.</dd></div>
+  </dl>
+</div></section>
+
+<section class="closer"><div class="wrap"><h2>Find the big stuff. Get your space back.</h2><p>Free and open source. Download it, scan a drive, and see where it all went.</p>
+<div class="cta"><a class="btn" href="/download"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-4.500-4.500M12 15l4.500-4.500M4 20h16"/></svg><span>Download</span></a><a class="btn btn-quiet" href="https://github.com/MarshallNickolauson/OpenStorage" target="_blank" rel="noopener noreferrer">View on GitHub</a></div></div></section>
+
+</main>
+<footer class="footer">
+  <div class="foot-top">
+    <div class="foot-brand"><a class="brand" href="/"><img src="/img/icon.png" alt="" width="24" height="24"><span>OpenStorage</span></a>
+    <p>A tiny, free, open-source disk usage visualizer for macOS, Windows and Linux. Written in Rust.</p></div>
+    <nav class="foot-cols mono" aria-label="Footer">
+      <div><h4>Product</h4><a href="/#try">Try it</a><a href="/#features">Features</a><a href="/download">Download</a></div>
+      <div><h4>Project</h4><a href="https://github.com/MarshallNickolauson/OpenStorage" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://github.com/MarshallNickolauson/OpenStorage/releases" target="_blank" rel="noopener noreferrer">Releases</a><a href="https://github.com/MarshallNickolauson/OpenStorage/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></div>
+      <div><h4>Legal</h4><a href="/privacy">Privacy</a><a href="https://github.com/MarshallNickolauson/OpenStorage/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License (MIT)</a></div>
+    </nav>
+  </div>
+  <div class="foot-base mono"><span>© 2026 Marshall Nickolauson · MIT license</span><span>Independent project, not affiliated with WinDirStat or any other product.</span></div>
+</footer>
+<div class="tip" id="tip"></div>
+<script src="/main.js" defer></script>
+
+</body></html>
