@@ -214,3 +214,7 @@ body { counter-reset: sec; }
 .hero h1 { max-width: none; font-size: clamp(26px, 5.4vw, 70px); white-space: nowrap; }
 .hero .frame .bar { justify-content: flex-start; }
 @media (max-width: 560px) { .hero h1 { white-space: normal; font-size: clamp(30px, 9vw, 44px); } }
+:root { --nav-h: 48px; }
+.nav-in .brand { font-size: 15px; padding: 0 16px; }
+.nav-in .brand img { width: 20px; height: 20px; }
+.nav-in > a, .nav-in > button, .nav-links a { padding: 0 14px; font-size: 11px; }
