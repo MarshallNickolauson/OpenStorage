@@ -218,3 +218,6 @@ body { counter-reset: sec; }
 .nav-in .brand { font-size: 15px; padding: 0 16px; }
 .nav-in .brand img { width: 20px; height: 20px; }
 .nav-in > a, .nav-in > button, .nav-links a { padding: 0 14px; font-size: 11px; }
+.nav-in > .support-btn { border-right: 0; border-left: 1px solid var(--line); }
+.support-btn svg { color: #e5566d; }
+@media (max-width: 860px) { .nav-in > .support-btn { display: none; } }
